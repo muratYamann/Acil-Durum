@@ -1,0 +1,37 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">Emergency</string>
+    <string name="title_activity_maps">Emergency</string>
+
+
+    <!-- Tab Name -->
+    <string name="tab_call">CALL</string>
+    <string name="tab_sms">SMS</string>
+    <string name="tab_user">User</string>
+
+
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">Police</string>
+    <string name="btnAmbulance">Ambulance</string>
+    <string name="btnGas">Gas Leak</string>
+    <string name="btnFire">Fire</string>
+    <string name="btnRoadAsistance">R.Assistance</string>
+    <string name="btnElectrict">Electrict</string>
+    <string name="btnSoilder">Soilder</string>
+    <string name="btnWhereIm">Where Im</string>
+
+    <!--Login -->
+    <string name="name">Name </string>
+    <string name="lastName">Surname </string>
+    <string name="age">Age </string>
+    <string name="ID">ID </string>
+    <string name="btnLogin">Login</string>
+
+    <!--splash -->
+    <string name="splash_text">E m e r g e n c y</string>
+
+
+</resources>

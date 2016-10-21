@@ -1,0 +1,374 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="60dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/emergency_ers"
+        android:id="@+id/imageView" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/username"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:inputType="textPersonName"
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastName" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        app:counterEnabled="true"
+        app:counterMaxLength="4"
+        android:maxLength="4"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="4"
+            android:hint="@string/age" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:textColorHint="@color/white"
+        android:layout_width="match_parent"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
+        android:maxLength="11"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/userID"
+            android:maxLength="11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/ID" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        app:counterEnabled="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:textColor="@color/white"
+            android:id="@+id/etAdres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:hint="Adres" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textColor="@android:color/holo_red_dark"
+        android:text=""
+        android:id="@+id/notification_fatal"
+        android:layout_gravity="center_horizontal" />
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/roottLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="13sp"
+        android:textColor="#000"
+        android:id="@+id/tvResponse"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnlogin"
+        android:gravity="center"
+        android:background="@color/btn"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginBottom="15dp"
+    android:text="@string/btnLogin"/>
+
+</LinearLayout>
+
+</ScrollView>
+
+
+<!--
+   Snack Bar
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/drawerLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>
+
+
+CoordinatorLayout rootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
+Snackbar.make(rootLayout, "Bu bir Snackbar...:)", Snackbar.LENGTH_LONG)
+       .setAction("Action!", new View.OnClickListener() {
+        @Override
+           public void onClick(View v) {
+              Log.w("App", "Action!");
+           }
+        } )
+        .show();
+
+ -->
+<!--
+ <android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="#000"
+                app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/splash"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.7" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/primary"
+                 android:paddingTop="56dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                >
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@color/white">
+        <EditText
+            app:hintTextAppearance="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="#ffffff"
+            android:id="@+id/username"
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adı" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        app:hintTextAppearance="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+
+            app:hintTextAppearance="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="#ffffff"
+            android:inputType="textPersonName"
+            android:id="@+id/lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Soyadı" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:textColorHint="@color/white"
+        app:hintTextAppearance="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:counterEnabled="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+
+            app:hintTextAppearance="@color/white"
+            android:textColorHint="@color/white"
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="4"
+            android:hint="Dogum yılı" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+
+        app:hintTextAppearance="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:counterEnabled="true"
+        android:maxLength="11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+
+            app:hintTextAppearance="@color/white"
+            android:textColorHint="@color/white"
+            android:id="@+id/userID"
+            android:maxLength="11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="TC kimlik No" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textColor="@android:color/holo_red_dark"
+        android:text=""
+        android:id="@+id/notification_fatal"
+        android:layout_gravity="center_horizontal" />
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/roottLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.design.widget.CoordinatorLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="13sp"
+        android:textColor="#000"
+        android:id="@+id/tvResponse"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnlogin"
+        android:gravity="center"
+        android:background="@color/primary_darker"
+        android:textColor="@color/aluminum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="Login"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>
+
+-->

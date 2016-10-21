@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/ambulance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnAmbulance"
+                    android:id="@+id/call_ambulance"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp" />
+
+                <Button
+                    android:paddingLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/police"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnPolice"
+                    android:onClick="police"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_police" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/gas"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnGas"
+                    android:onClick="gasLeak"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_gas" />
+
+
+                <Button
+                    android:paddingLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/fire_department"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnFire"
+                    android:onClick="fire"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_fire" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/road_assistance"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnRoadAsistance"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:onClick="road_assistance"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_road" />
+
+                <Button
+                    android:paddingLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/electrict"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnElectrict"
+                    android:onClick="electrict"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_elektrik" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/soldier"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnSoilder"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:onClick="soldier"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_soldier" />
+
+                <Button
+                    android:paddingLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/traffic_police"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnTraffict"
+                    android:onClick="traffict"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_traffict" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/belediye"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnBelediye"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:onClick="soldier"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_belediye" />
+
+                <Button
+                    android:paddingLeft="20dp"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/forest_fire"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnOrman"
+                    android:onClick="Orman"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_margin="18dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_orman" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_gravity="center_horizontal"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/add_new"
+                    android:layout_width="wrap_content"
+                    android:text="@string/btnDiger"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:onClick="diger"
+                    android:layout_margin="15dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/call_diger" />
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

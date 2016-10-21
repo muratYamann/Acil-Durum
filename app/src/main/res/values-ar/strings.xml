@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">الطوارئ </string>
+    <string name="title_activity_maps">الطوارئ</string>
+
+
+
+    <!-- Tab Name -->
+    <string name="tab_call">مكالمة</string>
+    <string name="tab_sms">رسالة</string>
+    <string name="tab_user">مستخدم</string>
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">شرطة</string>
+    <string name="btnAmbulance">سيارة إسعاف</string>
+    <string name="btnGas">تسرب الغاز</string>
+    <string name="btnFire">حريق</string>
+    <string name="btnRoadAsistance">الطريق المعونة</string>
+    <string name="btnElectrict">كهرباء</string>
+    <string name="btnSoilder">دركي</string>
+    <string name="btnWhereIm">أين أنا</string>
+
+
+
+
+
+    <!--Login -->
+    <string name="name">اسم </string>
+    <string name="lastName">لقب </string>
+    <string name="age">سنة الميلاد </string>
+    <string name="ID">بطاقة الهوية رقم</string>
+    <string name="btnLogin">دخول</string>
+
+    <!--Splash -->
+ <string name="splash_text">الطوارئ</string>
+
+
+
+</resources>

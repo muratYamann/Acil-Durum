@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">urgence</string>
+    <string name="title_activity_maps">urgence</string>
+
+    <!-- Tab Name -->
+    <string name="tab_call">appel</string>
+    <string name="tab_sms">message</string>
+    <string name="tab_user">utilisateur</string>
+
+
+
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">police</string>
+    <string name="btnAmbulance">ambulance</string>
+    <string name="btnGas">fuite de gaz</string>
+    <string name="btnFire">feu</string>
+    <string name="btnRoadAsistance">aide route</string>
+    <string name="btnElectrict">électrique</string>
+    <string name="btnSoilder">gendarme</string>
+    <string name="btnWhereIm">Où suis</string>
+
+
+
+
+
+    <!--Login -->
+    <string name="name">nom </string>
+    <string name="lastName"> nom de famille</string>
+    <string name="age">Année de naissance </string>
+    <string name="ID">Carte ID  </string>
+    <string name="btnLogin">entrée</string>
+
+    <!--Splash -->
+ <string name="splash_text">urgence</string>
+
+
+
+</resources>

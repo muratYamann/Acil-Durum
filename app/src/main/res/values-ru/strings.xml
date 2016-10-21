@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">чрезвычайная ситуация</string>
+    <string name="title_activity_maps">чрезвычайная ситуация</string>
+
+
+    <!-- Tab Name -->
+    <string name="tab_call">вызов</string>
+    <string name="tab_sms">сообщение</string>
+    <string name="tab_user">пользователь</string>
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">полиция</string>
+    <string name="btnAmbulance">скорая помощь</string>
+    <string name="btnGas">утечка газа</string>
+    <string name="btnFire">пожар</string>
+    <string name="btnRoadAsistance">Дорожная помощь</string>
+    <string name="btnElectrict">электричество</string>
+    <string name="btnSoilder">жандарма</string>
+    <string name="btnWhereIm">Где я</string>
+
+
+
+
+
+    <!--Login -->
+    <string name="name"> имя</string>
+    <string name="lastName"> фамилия</string>
+    <string name="age"> Год рождения</string>
+    <string name="ID">Удостоверение личности No.</string>
+    <string name="btnLogin">вход</string>
+
+    <!--Splash -->
+    <string name="splash_text">чрезвычайная ситуация</string>
+
+
+
+</resources>

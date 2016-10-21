@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">Notfall</string>
+    <string name="title_activity_maps">Notfall</string>
+
+
+    <!-- Tab Name -->
+    <string name="tab_call">Anruf</string>
+    <string name="tab_sms">Nachricht</string>
+    <string name="tab_user">Benutzer</string>
+
+
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">Polizei</string>
+    <string name="btnAmbulance">Krankenwagen</string>
+    <string name="btnGas">Gas-Leck</string>
+    <string name="btnFire">Feuer</string>
+    <string name="btnRoadAsistance">Straßen Aid</string>
+    <string name="btnElectrict">Strom</string>
+    <string name="btnSoilder">Gendarm</string>
+    <string name="btnWhereIm">wo bin</string>
+
+
+
+
+
+    <!--Login -->
+    <string name="name">Name </string>
+    <string name="lastName">Nachname </string>
+    <string name="age">Geburtsjahr </string>
+    <string name="ID">Personalausweis -Nr</string>
+    <string name="btnLogin">Eintrag</string>
+
+    <!--Splash -->
+ <string name="splash_text">Notfall</string>
+
+
+
+</resources>

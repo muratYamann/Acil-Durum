@@ -1,0 +1,67 @@
+<resources>
+
+    <!-- app Text -->
+    <string name="app_name">Acil Durum</string>
+    <string name="title_activity_maps">Acil Durum</string>
+
+
+    <!-- Tab Name   Sisteme kayıt-->
+    <string name="tab_call">Ara</string>
+    <string name="tab_sms">Durum Bildir</string>
+    <string name="tab_user">Kullanıcı</string>
+
+
+
+    <!--Button Text  -->
+    <string name="btnPolice">Polis</string>
+    <string name="btnAmbulance">Ambulans</string>
+    <string name="btnGas">Gaz Sızıntı</string>
+    <string name="btnFire">Yangın</string>
+    <string name="btnRoadAsistance">Yol Yardim</string>
+    <string name="btnElectrict">Elektrik</string>
+    <string name="btnSoilder">Jandarma</string>
+    <string name="btnWhereIm">Nerdeyim</string>
+
+
+    <string name="btnTraffict">Trafik P.</string>
+    <string name="btnBelediye">Belediye</string>
+    <string name="btnOrman">Orman Y.</string>
+    <string name="btnDiger">Diger</string>
+
+
+    <!--Splash -->
+    <string name="splash_text">Acil    Durum</string>
+
+
+    <!--Login -->
+    <string name="name">Adı </string>
+    <string name="lastName">Soyadı </string>
+    <string name="age">Dogum Yılı </string>
+    <string name="ID">TC kimlik No </string>
+    <string name="btnLogin">Giriş</string>
+
+    <!--Add new Department -->
+
+    <string name="dname">Adı : </string>
+    <string name="dfonksiyon">Birim Fonksiyonu : </string>
+    <string name="dmessage">Birim Mesajı : </string>
+    <string name="dnumber">Birim Numarası :</string>
+    <string name="dsave">Kaydet</string>
+
+
+<!-- "zabıta", "Saglık Danışmanı","Cenaze Hizmetleri","Sahil Güvenlik","Su Arıza fatura Bilgileri","izmit ulaşım -->
+    <string name="calling">Arama Yapılıyor ...</string>
+    <string name="calingDepartmenCenaze">Cenaze Hizmetleri</string>
+    <string name="calingDepartmenSahilGuv">Sahil Güvenlik</string>
+    <string name="calingDepartmenSuAriza">Su Arıza fatura Bilgileri</string>
+    <string name="calingDepartmenizmitUlasim">izmit ulaşım</string>
+
+
+
+
+
+
+
+
+
+</resources>

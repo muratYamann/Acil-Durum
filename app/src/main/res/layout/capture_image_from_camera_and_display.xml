@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_margin="16dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Resim Çektiktek Sonra OK tusuna basarak gonderme işlemi yapabilirsiniz "/>
+
+    <Button
+        android:id="@+id/take_image_from_camera"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/camera_yys"
+        android:onClick="takeImageFromCamera"
+        android:layout_height="wrap_content"
+        android:text="Resim Çek"/>
+
+    <ImageView
+        android:id="@+id/image_from_camera"
+        android:layout_width="match_parent"
+        android:src="@drawable/ic_cast_dark"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="www.yamankod.com"
+        android:autoLink="web"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:gravity="center|bottom"/>
+</LinearLayout>

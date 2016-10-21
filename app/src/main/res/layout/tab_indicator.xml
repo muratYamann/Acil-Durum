@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/tab_linear_width"
+    android:layout_height="wrap_content"
+    android:layout_weight="@integer/tab_linear_weight"
+    style="?actionBarTabTextStyle"
+    android:orientation="vertical" >
+    <ImageView
+        android:layout_weight="@integer/tab_image_weight"
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:layout_weight="@integer/tab_text_weight"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+</LinearLayout>

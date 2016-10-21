@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black"
+    tools:context=".WeakLockActivity">
+
+    <ImageView
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/emergency_ers"
+        android:id="@+id/image1" />
+
+
+    <ImageView
+
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/emergency_app"
+            android:id="@+id/image" />
+
+    <TextView
+        android:layout_margin="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/splash_text"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/btn"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
