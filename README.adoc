@@ -20,9 +20,7 @@ Uygulama kullanıcısı kendisinin tanımladığı veya uygulamada var olan herh
 Uygulamada 1 sn lik bir bekleme yapıp Login Ekranına yönlendirilir.
 
 
-image::rsm_splash.png[]
-
-
+image::rsm_splash.png[splash,360,640]
 
 
 == Login
@@ -31,7 +29,7 @@ Uygulama Kullanıcısının Ad, Soyad,Yas ve TC kimlik No Bilgileri alınarak gu
 Alınan Bilgilerin dogruğu sağlantıktan Sonra Uygulamaya giriş sağlanır.
 
 
-image::rsm_login.png[]
+image::rsm_login.png[Login,360,640]
 
 
 
@@ -42,11 +40,11 @@ image::rsm_login.png[]
 Uygulamaya giriş yapıldıktan sonra Kullanıcı istedigi birime tıklayarak olay ile ilgili Durumbildirimi veya Durum + Resim bildirimi yapabiliyor .
 
 
-image::rsm_durumbildir.png[]
+image::rsm_durumbildir.png[Durum Bildir,360,640]
 
 Kullanıcı Durum bildirme için herhangi bir birime çağrı yaptığında Aşagıda ki ekranla karşılaşacak
 
-image::rsm_arasms.png[]
+image::rsm_arasms.png[Durum Bildir,360,640]
 
 
 
@@ -54,7 +52,7 @@ image::rsm_arasms.png[]
 
 Uygulamadaki birimler üzerine tıklama ile Arama işlemi gerçekleştirilir.
 
-image::rsm_call.png[]
+image::rsm_call.png[Arama,360,640]
 
 
 
@@ -62,31 +60,32 @@ image::rsm_call.png[]
 
 Arama seçenekleri için geliştirilmiş harici ekran .
 
-image::rsm_diger.png[]
+image::rsm_diger.png[diger aramalar,360,640]
 
 
 == Tab_kullanici
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
-image::rsm_kullanici.png[]
+image::rsm_kullanici.png[kullanici,360,640]
 
 
 
 == Tab_birim
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
-image::rsm_birimekle.png[]
+image::rsm_birimekle.png[birim,360,640]
 
 
 == Maps
 
 Kullanıcıın bulunduğu konumu adresi ile birlikte ekranda gosterir .
 
-image::rsm_maps.png[]
+image::rsm_maps.png[maps,360,640]
 
 == Camera
 
 Kameradan Görüntü alır ve alınan görüntüyü webService Yollama işlemlerini gerçekleştirir.
 
-image::rsm_kamera.png[]
+image::rsm_kamera.png[kamera,360,640]
+
 
