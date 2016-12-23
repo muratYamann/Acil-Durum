@@ -1,3 +1,5 @@
+:imagesdir: resimler
+
 # Acil Durum Mobil Uygulaması
 
 Tübitak Yazılım Yarışması Emergency mobile app ( final sergisi )
@@ -16,3 +18,4 @@ Uygulama kullanıcısı kendisinin tanımladığı veya uygulamada var olan herh
 ekran görüntüleri ile desteklenmiş olarak özelliklerin anlatımı
 
 
+image::rsm_call.png[]

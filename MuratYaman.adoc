@@ -26,19 +26,11 @@ uygulama ile ilgili bir tanıtım,logo vb bir ekranı gösterme.
 -----
 public class SplashActivity extends Activity {
 
-    private Intent intentmain;
-    private Intent intetLogin;
 
-    public  static  final String myId ="Prefs";
-http://http[http][]://[]    public  static  final int actMode =Activity.MODE_PRIVATE;
-
-    private static final String TAG = "_Splash";
     private static int SPLASH_TIME_OUT = 1000;    <1>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate");
-
         setContentView(R.layout.activity_splash);
         startHandler();
 
@@ -50,20 +42,8 @@ http://http[http][]://[]    public  static  final int actMode =Activity.MODE_PRI
             public void run() {
 
                 intetLogin  =new Intent(getApplicationContext(),Login.class);
-                intentmain =new Intent(getApplicationContext(),MainActivity.class);
+                 startActivity(intetLogin);
 
-                SharedPreferences myPrefs = getSharedPreferences(myId, actMode);
-
-                int kulaniciLogin = myPrefs.getInt("count", 0);
-                String kLogin =myPrefs.getString("login","false");
-
-                Log.d(TAG, "Splash: "+kLogin);
-
-                 if (kulaniciLogin==0){
-                    startActivity(intetLogin);
-                }else {
-                    startActivity(intentmain);
-                }
                 finish();
             }
         }, SPLASH_TIME_OUT);
@@ -91,122 +71,11 @@ https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx/ Uygulama kullanıcısının 
  */
 public class Login extends AppCompatActivity {
 
-    private  static        String TAG="kisiKAyit";
     private  static  final String NAMESPACE_TC ="http://tckimlik.nvi.gov.tr/WS";
     private  static  final String SERVİCEURL_TC ="https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx";
     private  static  final String METHODNAME_TC ="TCKimlikNoDogrula";
     private  static  final String SOAPACTION_TC="http://tckimlik.nvi.gov.tr/WS/TCKimlikNoDogrula";
 
-
-    public  static  final String myidd ="Prefss";
-    public  static  final String myid ="Prefs";
-    public static final int actMode = Activity.MODE_PRIVATE;
-
-    SharedPreferences preferences_kisi_bilgi ;
-    SharedPreferences.Editor editor_kisi_bilgi;
-
-
-    private Boolean response;
-    String personInfo ="";
-    private EditText userName;
-    private EditText lastName;
-    private EditText userID;
-    private EditText userAge;
-    private EditText Adres;
-    private TextView tSonuc ;
-    private String donen="";
-    private Button btnLogin;
-
-
-    private SharedPreferences.Editor editor;
-    private SharedPreferences sp;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-       // Login.this.getWindow().setStatusBarColor(Color.parseColor("#b21212"));
-
-        setContentView(R.layout.login);
-        setupVariable();
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                try {
-
-                    String login ="yes";
-
-                    <1>
-
-                    String user = userName.getText().toString().trim();
-                    String surname = lastName.getText().toString().trim();
-                    long ID = Long.valueOf(userID.getText().toString().trim());
-                    int Age = Integer.valueOf(userAge.getText().toString().trim());
-                    String adress = Adres.getText().toString();
-                    Log.d(TAG, "OnClick");
-
-                    <2>
-
-                    String convertStringID = String.valueOf(ID);
-                    String convertStringAge = String.valueOf(Age);
-
-                    String uID =userID.getText().toString().trim();
-                    int uid =uID.length();
-                    String yas = String.valueOf(Age);
-
-
-                   <3>
-
-                    if( ( uid==11 ) &&  ( !user.isEmpty() ) && ( !surname.isEmpty() )  && ( yas.length()==4 ) ) {
-
-                        MyAsyncTask task = new MyAsyncTask();
-                        task.execute();
-
-                        personInfo = user+","+surname+","+yas+","+adress;
-                        editor_kisi_bilgi.putString("kisi_bilgileri",personInfo);
-                        editor_kisi_bilgi.commit();
-                        Log.d(TAG, "kisi_bilgileri login: "+personInfo);
-
-
-                        sp= getSharedPreferences(myid, actMode);
-                        editor = sp.edit();
-
-                        editor.putString("username", user);
-                        editor.putString("surname", surname);
-                        editor.putString("userıd", convertStringID);
-                        editor.putString("personInfo",personInfo);
-                        editor.putString("login", login);
-                        editor.putInt("count", 1);
-
-                        editor.commit();
-                    }
-                    else {
-                        Toast.makeText(Login.this, "Tc niz 11 karaketerden küçük olamaz ", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                catch (Exception e){}
-                }
-            });
-
-         <4>
-    }
-    public void setupVariable(){
-
-
-        userName = (EditText)findViewById(R.id.username);
-        lastName = (EditText)findViewById(R.id.lastname);
-        userID =(EditText)findViewById(R.id.userID);
-        userAge=(EditText)findViewById(R.id.age);
-        Adres = (EditText)findViewById(R.id.etAdres);
-        tSonuc=(TextView)findViewById(R.id.tvResponse);
-        btnLogin =(Button)findViewById(R.id.btnlogin);
-
-        preferences_kisi_bilgi =getSharedPreferences(myidd,0);
-        editor_kisi_bilgi = preferences_kisi_bilgi.edit();
-
-
-    }
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
 
@@ -223,46 +92,29 @@ public class Login extends AppCompatActivity {
                 if (sonuc != null) {
                     Log.d(TAG, "onPostExecute: Sonuc "+sonuc);
                     if (sonuc.equals("true")){
-                        Toast.makeText(getApplicationContext(),"Giriş Başarılı", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "donen: "+donen.toString());
-
                         Intent i=new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(i);
                     }
-                    else {
-                        Toast.makeText(getApplicationContext(), "Boyle bir Kayit yok  \n veya \n bilgileri yanlış girdiniz  . Bilgilerinizi Dogru giriniz.", Toast.LENGTH_SHORT).show();}
-                    tSonuc.setText(sonuc);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Result Found is ==  " + sonuc + "", Toast.LENGTH_LONG).show();
-                }
-                if (this.dialog.isShowing()) {
-                    this.dialog.dismiss();
-                }
-                super.onPostExecute(sonuc);
-            }catch (Exception e){
-                Toast.makeText(getApplicationContext(), "tekrar Deneyin", Toast.LENGTH_SHORT).show();
-            }
+            }catch (Exception e){ }
         }
         @Override
         protected String doInBackground(String... params) {
             String son = "";
-            son= ControlUserID();
+
+            son= ControlUserID(); <1>
             return son;
         }
     };
 
+    <2>
     public String ControlUserID() {
 
-        Log.d(TAG, "ControlUserID: ");
         String responseValue = "";
         SoapObject request = new SoapObject(NAMESPACE_TC, METHODNAME_TC);
         request.addProperty("TCKimlikNo", Long.valueOf(userID.getText().toString()));
         request.addProperty("Ad",userName.getText().toString().toUpperCase().trim());
         request.addProperty("Soyad",lastName.getText().toString().toUpperCase().trim());
         request.addProperty("DogumYili",Integer.valueOf(userAge.getText().toString().trim()));
-
-        Log.d(TAG,request.toString());
 
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(
                 SoapEnvelope.VER11);
@@ -291,9 +143,8 @@ public class Login extends AppCompatActivity {
 
 ----
 
-<1> ve <2>  alan arasında kalan kısımda kullanıcının girdiği kişi bilgileri alınıyor.
-<3> ve <4>  alan da ise alına bilgileri Sorgulanmak üzeri Web Service Gönderiliyor . Aynı zaman da Shared Preferences ile kayıt altında tutuluyor
-daha sonrasın da yaptıgı acil durum bildirimlerinde Kullanılıyor.
+<1>  bu alanda kullanıcının girdiği kişi bilgileri dogrulanmak için tanımlanmıs olan metoda gonderiliyor ve sonuç onPostExecute metoduna dondürülüyor.
+<2>  kisi bilgileri web service yardımı ile dogrulanır.
 
 == 3)Tap Slider
 
@@ -379,45 +230,18 @@ LocationServiceden Aldığı enlem ve boylam degeri sayasinde işlevini yerine g
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    LocationService locationService;
-    private  Context mContext;
-    private  final static  String TAG="_MapsActivity";
-
-    TextView tv;
-    CoordinatorLayout c;
-
-    public String adress;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        mContext =getApplicationContext();
-        locationService = new LocationService(getApplicationContext());
-         c = (CoordinatorLayout)findViewById(R.id.main_content);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-    }
-
     //Location Serviceden Aldığı Degerler sayesinde Konumu haritaya basar.
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
         LatLng location = new LatLng(locationService.getLatitude(), locationService.getLongitude());
         mMap.addMarker(new MarkerOptions().position(location).title("Konumunuz"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
 
-
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
         mMap.animateCamera(yourLocation);
 
-        Double latitude =  Double.valueOf(locationService.getLatitude());
-        Double longitude =  Double.valueOf(locationService.getLongitude());
-
-         adress=getCompleteAddressString(latitude, longitude);
+        adress=getCompleteAddressString(latitude, longitude);
 
         Snackbar snackbar = Snackbar.make(c, adress.toString(), Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
@@ -488,29 +312,9 @@ Uygulamada acil durum bildirimlerde olay ile ilgili fotograf alabilmek için ekl
  */
 public class Camera extends AppCompatActivity {
 
-    private static String TAG ="_CaptureImage";
-    private  String   encodedImageData="murad";
-    private LocationService locationService;
-    private String konum;
+
     private static final int CAMERA_REQUEST = 1888;
-    ImageView mimageView;
 
-    Intent intentBunle ;
-    Bundle bundle;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.capture_image_from_camera_and_display);
-
-        locationService = new LocationService(getApplicationContext());
-        konum=  String.valueOf(locationService.getLatitude()) + "," +
-                String.valueOf(locationService.getLongitude());
-
-        intentBunle = getIntent();
-        bundle = intentBunle.getExtras();
-        mimageView = (ImageView) this.findViewById(R.id.image_from_camera);
-        Button button = (Button) this.findViewById(R.id.take_image_from_camera);
-    }
     <1>
     public void takeImageFromCamera(View view) {
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -563,28 +367,9 @@ hemen sonrasın da veriler  veritabanından çekilerek Web tarafında(http://www
 
 public class WebService extends AsyncTask<String ,Void,String> {
 
-    Context ctx;
-    private  String TAG ="background";
-    private HttpClient httpClient;
-    private HttpPost httpPost;
-    private List<NameValuePair> nameValuePair;
-
-    JSONObject jsonObject;
-    private  ProgressDialog dialog ;
-
-   public WebService(Context ctx){
-       this.ctx=ctx;
-       dialog = new ProgressDialog(ctx);
-    }
-
     @Override
     protected String doInBackground(String... params) {
-        String brm =params[0];
-        String knm=params[1];
-        String msj =params[2];
-        String rsm=params[3];
-
-        // replace with your url
+       // replace with your url
         String reg_url ="http://yamankod.com/durumum_acil/service.php";
         //Date & Time
         Calendar c = Calendar.getInstance();
@@ -604,10 +389,6 @@ public class WebService extends AsyncTask<String ,Void,String> {
             nameValuePair.add(new BasicNameValuePair("parametre", jsonObject.toString()));
 
         } catch (JSONException e) {e.printStackTrace();}
-        Log.d(TAG, "makePostRequest: Jsonn"+jsonObject.toString());
-        Log.d(TAG, "makePostRequest  Birim: "+brm+"--konum:"+knm+" -- Mesaj :" +msj+"--resim :"+reg_url+"--Tarih :");
-
-        //Encoding POST data
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
         } catch (UnsupportedEncodingException e) {e.printStackTrace();}
@@ -625,19 +406,10 @@ public class WebService extends AsyncTask<String ,Void,String> {
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        String message ="gonderiliyor...";
-        this.dialog.setMessage(message);
-    }
-    @Override
     protected void onPostExecute(String results) {
         this.dialog.dismiss();
     }
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
+
 }
 
 -----
