@@ -20,7 +20,7 @@ Uygulama kullanıcısı kendisinin tanımladığı veya uygulamada var olan herh
 Uygulamada 1 sn lik bir bekleme yapıp Login Ekranına yönlendirilir.
 
 
-image::rsm_splash.png[splash,360,640]
+image::rsm_splash.png[splash,180,320]
 
 
 == Login
@@ -29,7 +29,7 @@ Uygulama Kullanıcısının Ad, Soyad,Yas ve TC kimlik No Bilgileri alınarak gu
 Alınan Bilgilerin dogruğu sağlantıktan Sonra Uygulamaya giriş sağlanır.
 
 
-image::rsm_login.png[Login,360,640]
+image::rsm_login.png[Login,180,320]
 
 
 
@@ -40,11 +40,11 @@ image::rsm_login.png[Login,360,640]
 Uygulamaya giriş yapıldıktan sonra Kullanıcı istedigi birime tıklayarak olay ile ilgili Durumbildirimi veya Durum + Resim bildirimi yapabiliyor .
 
 
-image::rsm_durumbildir.png[Durum Bildir,360,640]
+image::rsm_durumbildir.png[Durum Bildir,180,320]
 
 Kullanıcı Durum bildirme için herhangi bir birime çağrı yaptığında Aşagıda ki ekranla karşılaşacak
 
-image::rsm_arasms.png[Durum Bildir,360,640]
+image::rsm_arasms.png[Durum Bildir,180,320]
 
 
 
@@ -52,7 +52,7 @@ image::rsm_arasms.png[Durum Bildir,360,640]
 
 Uygulamadaki birimler üzerine tıklama ile Arama işlemi gerçekleştirilir.
 
-image::rsm_call.png[Arama,360,640]
+image::rsm_call.png[Arama,180,320]
 
 
 
@@ -60,32 +60,32 @@ image::rsm_call.png[Arama,360,640]
 
 Arama seçenekleri için geliştirilmiş harici ekran .
 
-image::rsm_diger.png[diger aramalar,360,640]
+image::rsm_diger.png[diger aramalar,180,320]
 
 
 == Tab_kullanici
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
-image::rsm_kullanici.png[kullanici,360,640]
+image::rsm_kullanici.png[kullanici,180,320]
 
 
 
 == Tab_birim
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
-image::rsm_birimekle.png[birim,360,640]
+image::rsm_birimekle.png[birim,180,320]
 
 
 == Maps
 
 Kullanıcıın bulunduğu konumu adresi ile birlikte ekranda gosterir .
 
-image::rsm_maps.png[maps,360,640]
+image::rsm_maps.png[maps,180,320]
 
 == Camera
 
 Kameradan Görüntü alır ve alınan görüntüyü webService Yollama işlemlerini gerçekleştirir.
 
-image::rsm_kamera.png[kamera,360,640]
+image::rsm_kamera.png[kamera,180,320]
 
 
