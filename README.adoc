@@ -42,6 +42,10 @@ image::rsm_login.png[]
 Uygulamaya giriş yapıldıktan sonra Kullanıcı istedigi birime tıklayarak olay ile ilgili Durumbildirimi veya Durum + Resim bildirimi yapabiliyor .
 
 
+image::rsm_durumbildir.png[]
+
+Kullanıcı Durum bildirme için herhangi bir birime çağrı yaptığında Aşagıda ki ekranla karşılaşacak
+
 image::rsm_arasms.png[]
 
 
@@ -84,5 +88,5 @@ image::rsm_maps.png[]
 
 Kameradan Görüntü alır ve alınan görüntüyü webService Yollama işlemlerini gerçekleştirir.
 
-
+image::rsm_kamera.png[]
 
