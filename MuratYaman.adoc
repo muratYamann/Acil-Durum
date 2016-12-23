@@ -305,12 +305,12 @@ Bunun için eklemek istediginiz her tap için bir sınıf eklenir .
 === Tab_SendSmsAndLocation
 [source,java]
 ----
-public class Tab_User extends Fragment
+public class Tab_SendSmsAndLocation extends Fragment
 ----
 === Tab_Call
 [source,java]
 ----
-public class Tab_User extends Fragment
+public class Tab_Call extends Fragment
 ----
 
 === Tab_user
