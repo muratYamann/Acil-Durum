@@ -15,7 +15,54 @@ Uygulama kullanıcısı kendisinin tanımladığı veya uygulamada var olan herh
 
 
 
-ekran görüntüleri ile desteklenmiş olarak özelliklerin anlatımı
+== splash
 
+Uygulamada 1 sn lik bir bekleme yapıp Login Ekranına yönlendirilir.
+
+
+image::rsm_splash.png[]
+
+
+
+
+== Login
+
+Uygulama Kullanıcısının Ad, Soyad,Yas ve TC kimlik No Bilgileri alınarak guvenlik sağlaması için kullanılır.
+Alınan Bilgilerin dogruğu sağlantıktan Sonra Uygulamaya giriş sağlanır.
+
+
+image::rsm_login.png[]
+
+
+
+
+
+== Tab_SendSmsAndLocation
+
+Uygulamaya giriş yapıldıktan sonra Kullanıcı istedigi birime tıklayarak olay ile ilgili Durumbildirimi veya Durum + Resim bildirimi yapabiliyor .
+
+
+image::rsm_arasms.png[]
+
+
+
+== Tab_Call
+
+Uygulamadaki birimler üzerine tıklama ile Arama işlemi gerçekleştirilir.
 
 image::rsm_call.png[]
+
+
+
+== Tab_kullanici
+Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
+
+image::rsm_kullanici.png[]
+
+
+
+== Tab_birim
+Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
+
+image::rsm_birimekle.png[]
+
