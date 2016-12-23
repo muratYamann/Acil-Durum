@@ -54,6 +54,13 @@ image::rsm_call.png[]
 
 
 
+== Diğer Aramalar
+
+Arama seçenekleri için geliştirilmiş harici ekran .
+
+image::rsm_diger.png[]
+
+
 == Tab_kullanici
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
@@ -65,4 +72,17 @@ image::rsm_kullanici.png[]
 Kullanıcı bu ekranda kendi acil birimlerini ekleyebilir .(ör: Anne,Baba ,Abi,Dayi vb)eklediği acil birimlere oluşabilecek bir acil durumda kolayca erişebilecek.
 
 image::rsm_birimekle.png[]
+
+
+== Maps
+
+Kullanıcıın bulunduğu konumu adresi ile birlikte ekranda gosterir .
+
+image::rsm_maps.png[]
+
+== Camera
+
+Kameradan Görüntü alır ve alınan görüntüyü webService Yollama işlemlerini gerçekleştirir.
+
+
 
