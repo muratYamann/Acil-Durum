@@ -36,12 +36,8 @@ public class Tab_Call extends Fragment {
 
     private Button btnjandarma_call ,btnOrmanYangini_call,btnBldye_call,btnTraficPolisi_call,btnDiger_call;
 
-    public  static  final String Prefs ="Prefs";
-    public  static  final int actMode = Activity.MODE_PRIVATE;
-    Vibrator vibrat;
-    SharedPreferences sp ;
-    SharedPreferences.Editor editor;
-    private   String numara;
+     Vibrator vibrat;
+     private   String numara;
 
     //"zabıta", "SaglıkDanışmanı","Cenaze Hizmetleri","Sahil Güvenlik","SuArıza fatura Bilgileri","izmit ulaşım"};//1
 

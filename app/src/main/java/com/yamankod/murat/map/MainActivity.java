@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         getPermissionWriteExternalStorage();
 
 
-
         btn=(Button)findViewById(R.id.button);
         vibrat = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         String sms = getResources().getString(R.string.tab_sms);
         String call = getResources().getString(R.string.tab_call);
         String user = getResources().getString(R.string.tab_user);
-
 
 
         tabLayout.addTab(tabLayout.newTab().setCustomView(setIconText(R.drawable.send_mssage_ki_b, sms)));
@@ -223,13 +221,4 @@ public class MainActivity extends AppCompatActivity {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-
-
-
-
-
-
-
-
 }

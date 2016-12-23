@@ -24,14 +24,10 @@ public class LocationService extends Service implements LocationListener {
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
 
-
     double latitude;
     double longitude;
-
     private static final long UPDATE_DISTANCE = 10; // Yer Bilgisini Güncelleme Mesafesi :  10 Metre
-
     private static final long UPDATE_TIME = 1000 * 60 * 1 ; //Yer bilgisini güncelleme zamanı:  1 dakika
-
     protected LocationManager locationManager;
 
     public LocationService(Context context){

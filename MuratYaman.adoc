@@ -1,0 +1,643 @@
+
+= Murat Yaman
+
+== Geliştirilen Uygulamadaki Görev
+
+
+. Splash Screen
+. Login with Web service
+. Tap Slider
+.. Durum bildirne (Tab_SendSmsAndLocation)
+.. Arama (Tab_Call)
+.. Acil Birim ekleme (Tab_User)
+. Pager Adapter
+. Maps Activity
+. Location Service
+. kamera ile Görüntü alma
+. Web Service
+
+
+=== 1)Splash Screen
+
+1. Uygulamanın açılması ile başlayan ufak bir zaman dilimi ile kullanıcıya
+uygulama ile ilgili bir tanıtım,logo vb bir ekranı gösterme.
+
+[source , java  ]
+-----
+public class SplashActivity extends Activity {
+
+    private Intent intentmain;
+    private Intent intetLogin;
+
+    public  static  final String myId ="Prefs";
+http://http[http][]://[]    public  static  final int actMode =Activity.MODE_PRIVATE;
+
+    private static final String TAG = "_Splash";
+    private static int SPLASH_TIME_OUT = 1000;    <1>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
+
+        setContentView(R.layout.activity_splash);
+        startHandler();
+
+    }
+    public void startHandler(){
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                intetLogin  =new Intent(getApplicationContext(),Login.class);
+                intentmain =new Intent(getApplicationContext(),MainActivity.class);
+
+                SharedPreferences myPrefs = getSharedPreferences(myId, actMode);
+
+                int kulaniciLogin = myPrefs.getInt("count", 0);
+                String kLogin =myPrefs.getString("login","false");
+
+                Log.d(TAG, "Splash: "+kLogin);
+
+                 if (kulaniciLogin==0){
+                    startActivity(intetLogin);
+                }else {
+                    startActivity(intentmain);
+                }
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
+    }
+
+}
+-----
+
+Thread yardimi ile ile 1. sn lik bir beklemenin ardindan gecis islemini gerceklestiriyoruz .
+ <1>  ile Belirttilen Kod parcasinda bekleme milisaniyesini yaziyoruz
+
+
+=== 2)Login with Web service
+
+2. Uygulamada Guvenlik amaçlı uygulama kullanıcısının kişisel bilgileri Login Ekranında
+ alınıp  Bakanlıgın Saglamıs Oldugu WebService Sayesinde
+https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx/ Uygulama kullanıcısının TC Cumhiyeti vatandaşı olduğu kontrol edilerek uygulamaya giriş yapmasına izin verilir.
+
+=== uygulama kodları .
+[source ,java]
+----
+
+/**
+ * Created by murat on 09.04.2016.
+ */
+public class Login extends AppCompatActivity {
+
+    private  static        String TAG="kisiKAyit";
+    private  static  final String NAMESPACE_TC ="http://tckimlik.nvi.gov.tr/WS";
+    private  static  final String SERVİCEURL_TC ="https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx";
+    private  static  final String METHODNAME_TC ="TCKimlikNoDogrula";
+    private  static  final String SOAPACTION_TC="http://tckimlik.nvi.gov.tr/WS/TCKimlikNoDogrula";
+
+
+    public  static  final String myidd ="Prefss";
+    public  static  final String myid ="Prefs";
+    public static final int actMode = Activity.MODE_PRIVATE;
+
+    SharedPreferences preferences_kisi_bilgi ;
+    SharedPreferences.Editor editor_kisi_bilgi;
+
+
+    private Boolean response;
+    String personInfo ="";
+    private EditText userName;
+    private EditText lastName;
+    private EditText userID;
+    private EditText userAge;
+    private EditText Adres;
+    private TextView tSonuc ;
+    private String donen="";
+    private Button btnLogin;
+
+
+    private SharedPreferences.Editor editor;
+    private SharedPreferences sp;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+       // Login.this.getWindow().setStatusBarColor(Color.parseColor("#b21212"));
+
+        setContentView(R.layout.login);
+        setupVariable();
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    String login ="yes";
+
+                    <1>
+
+                    String user = userName.getText().toString().trim();
+                    String surname = lastName.getText().toString().trim();
+                    long ID = Long.valueOf(userID.getText().toString().trim());
+                    int Age = Integer.valueOf(userAge.getText().toString().trim());
+                    String adress = Adres.getText().toString();
+                    Log.d(TAG, "OnClick");
+
+                    <2>
+
+                    String convertStringID = String.valueOf(ID);
+                    String convertStringAge = String.valueOf(Age);
+
+                    String uID =userID.getText().toString().trim();
+                    int uid =uID.length();
+                    String yas = String.valueOf(Age);
+
+
+                   <3>
+
+                    if( ( uid==11 ) &&  ( !user.isEmpty() ) && ( !surname.isEmpty() )  && ( yas.length()==4 ) ) {
+
+                        MyAsyncTask task = new MyAsyncTask();
+                        task.execute();
+
+                        personInfo = user+","+surname+","+yas+","+adress;
+                        editor_kisi_bilgi.putString("kisi_bilgileri",personInfo);
+                        editor_kisi_bilgi.commit();
+                        Log.d(TAG, "kisi_bilgileri login: "+personInfo);
+
+
+                        sp= getSharedPreferences(myid, actMode);
+                        editor = sp.edit();
+
+                        editor.putString("username", user);
+                        editor.putString("surname", surname);
+                        editor.putString("userıd", convertStringID);
+                        editor.putString("personInfo",personInfo);
+                        editor.putString("login", login);
+                        editor.putInt("count", 1);
+
+                        editor.commit();
+                    }
+                    else {
+                        Toast.makeText(Login.this, "Tc niz 11 karaketerden küçük olamaz ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e){}
+                }
+            });
+
+         <4>
+    }
+    public void setupVariable(){
+
+
+        userName = (EditText)findViewById(R.id.username);
+        lastName = (EditText)findViewById(R.id.lastname);
+        userID =(EditText)findViewById(R.id.userID);
+        userAge=(EditText)findViewById(R.id.age);
+        Adres = (EditText)findViewById(R.id.etAdres);
+        tSonuc=(TextView)findViewById(R.id.tvResponse);
+        btnLogin =(Button)findViewById(R.id.btnlogin);
+
+        preferences_kisi_bilgi =getSharedPreferences(myidd,0);
+        editor_kisi_bilgi = preferences_kisi_bilgi.edit();
+
+
+    }
+    public class MyAsyncTask extends AsyncTask<String, Void, String> {
+
+
+        private final ProgressDialog dialog = new ProgressDialog(Login.this);
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setMessage("Kontrol ediliyor...");
+            this.dialog.show();
+        }
+        @Override
+        protected void onPostExecute(String sonuc) {
+            try {
+                 donen=sonuc;
+                if (sonuc != null) {
+                    Log.d(TAG, "onPostExecute: Sonuc "+sonuc);
+                    if (sonuc.equals("true")){
+                        Toast.makeText(getApplicationContext(),"Giriş Başarılı", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "donen: "+donen.toString());
+
+                        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(i);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Boyle bir Kayit yok  \n veya \n bilgileri yanlış girdiniz  . Bilgilerinizi Dogru giriniz.", Toast.LENGTH_SHORT).show();}
+                    tSonuc.setText(sonuc);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Result Found is ==  " + sonuc + "", Toast.LENGTH_LONG).show();
+                }
+                if (this.dialog.isShowing()) {
+                    this.dialog.dismiss();
+                }
+                super.onPostExecute(sonuc);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "tekrar Deneyin", Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            String son = "";
+            son= ControlUserID();
+            return son;
+        }
+    };
+
+    public String ControlUserID() {
+
+        Log.d(TAG, "ControlUserID: ");
+        String responseValue = "";
+        SoapObject request = new SoapObject(NAMESPACE_TC, METHODNAME_TC);
+        request.addProperty("TCKimlikNo", Long.valueOf(userID.getText().toString()));
+        request.addProperty("Ad",userName.getText().toString().toUpperCase().trim());
+        request.addProperty("Soyad",lastName.getText().toString().toUpperCase().trim());
+        request.addProperty("DogumYili",Integer.valueOf(userAge.getText().toString().trim()));
+
+        Log.d(TAG,request.toString());
+
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(
+                SoapEnvelope.VER11);
+        soapEnvelope.dotNet = true;
+        soapEnvelope.setOutputSoapObject(request);
+        HttpTransportSE ahtSE = new HttpTransportSE(SERVİCEURL_TC);
+        try {
+            ahtSE.call(SOAPACTION_TC, soapEnvelope);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        try {
+            //karşıdan gelen response degirini alma (true ,false)
+            responseValue = ""+(SoapPrimitive) soapEnvelope.getResponse();
+            Log.d(TAG,responseValue);
+        } catch (SoapFault e) {
+            e.printStackTrace();
+        }
+        return responseValue;
+    }
+}
+
+----
+
+<1> ve <2>  alan arasında kalan kısımda kullanıcının girdiği kişi bilgileri alınıyor.
+<3> ve <4>  alan da ise alına bilgileri Sorgulanmak üzeri Web Service Gönderiliyor . Aynı zaman da Shared Preferences ile kayıt altında tutuluyor
+daha sonrasın da yaptıgı acil durum bildirimlerinde Kullanılıyor.
+
+== 3)Tap Slider
+
+Uygulamada Farklı ekranlar (Durum bildirme ,Arama ,Acil birim Eklem) Arasında Geçiş yapmayı sağlamak için Tab Slider Yapısı kullanıldı.
+Bunun için eklemek istediginiz her tap için bir sınıf eklenir .
+
+
+
+=== Tab_SendSmsAndLocation
+[source,java]
+----
+public class Tab_User extends Fragment
+----
+=== Tab_Call
+[source,java]
+----
+public class Tab_User extends Fragment
+----
+
+=== Tab_user
+[source,java]
+----
+public class Tab_User extends Fragment
+----
+
+
+== 4)Tab_PagerAdapter
+
+Tanımladığımız sınıflar için bir Adapter Sınıfına ihtiyacımız olcak bunun için :
+
+[source,java]
+----
+public class Tab_PagerAdapter extends FragmentStatePagerAdapter {
+    int mNumOfTabs;
+
+    public Tab_PagerAdapter(FragmentManager fm, int NumOfTabs) {
+        super(fm);
+        this.mNumOfTabs = NumOfTabs;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+
+        switch (position) {
+            case 0:
+                Tab_SendSmsAndLocation tab1 = new Tab_SendSmsAndLocation();
+                return tab1;
+            case 1:
+                Tab_Call tab2 = new Tab_Call();
+                return tab2;
+            case 2:
+               Tab_User tab3 = new Tab_User();
+               return tab3;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return mNumOfTabs;
+    }
+}
+----
+**
+Ekledigimiz clasları daha sonradasında Main.Activiy Klasımız da  Aşağıdaki tanımlama ile tanımlı hale getiriyoruz .
+**
+[source, java]
+ ----
+        tabLayout.addTab(tabLayout.newTab().setCustomView(setIconText(R.drawable.send_mssage_ki_b, sms)));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(setIconText(R.drawable.call_ki_b ,call)));
+        tabLayout.addTab(tabLayout.newTab().setCustomView(setIconText(R.drawable.user_ki_b, user)));
+----
+
+
+
+=== 5 ) Maps Activity
+5 Maps Activity Kullanıcının anlık olarak bulunduğu konumunu ve konumunun Adresini bildirmek için kullanılmıştır
+LocationServiceden Aldığı enlem ve boylam degeri sayasinde işlevini yerine getirebilmektedir.
+
+[source, java]
+----
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    LocationService locationService;
+    private  Context mContext;
+    private  final static  String TAG="_MapsActivity";
+
+    TextView tv;
+    CoordinatorLayout c;
+
+    public String adress;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
+        mContext =getApplicationContext();
+        locationService = new LocationService(getApplicationContext());
+         c = (CoordinatorLayout)findViewById(R.id.main_content);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    //Location Serviceden Aldığı Degerler sayesinde Konumu haritaya basar.
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng location = new LatLng(locationService.getLatitude(), locationService.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(location).title("Konumunuz"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+
+
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
+        mMap.animateCamera(yourLocation);
+
+        Double latitude =  Double.valueOf(locationService.getLatitude());
+        Double longitude =  Double.valueOf(locationService.getLongitude());
+
+         adress=getCompleteAddressString(latitude, longitude);
+
+        Snackbar snackbar = Snackbar.make(c, adress.toString(), Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+    }
+
+    //Aldıgı enlem boylam degerleri sayesinde adress bilgisini dondorür
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i < returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                Log.d(TAG, "getCompleteAddressString: " + strReturnedAddress.toString());
+            } else {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strAdd;
+    }
+}
+
+----
+
+== 6) Location Service
+ Location Service ile GPS ve Ag yardımı ile Anlık olarka Bulundugumuz yerin
+ Kordinatlarını alıp Acil durum bildirimlerinde ve kullanıcının konumunu,
+ adresini bulmada kullanılır.
+
+
+ verilen iki metod ile enlem boylam degeri alınır.
+
+
+[source, java]
+
+----
+public double getLatitude(){
+         if(location != null){
+             latitude = location.getLatitude();
+         }
+         return latitude;
+     }
+
+      public double getLongitude(){
+              if(location != null){
+                  longitude = location.getLongitude();
+              }
+              return longitude;
+          }
+----
+
+
+== 7) kamera ile Görüntü alma
+Uygulamada acil durum bildirimlerde olay ile ilgili fotograf alabilmek için eklenmiştir.
+
+[source ,java]
+----
+
+/**
+ * Created by murat on 01.05.2016.
+ */
+public class Camera extends AppCompatActivity {
+
+    private static String TAG ="_CaptureImage";
+    private  String   encodedImageData="murad";
+    private LocationService locationService;
+    private String konum;
+    private static final int CAMERA_REQUEST = 1888;
+    ImageView mimageView;
+
+    Intent intentBunle ;
+    Bundle bundle;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.capture_image_from_camera_and_display);
+
+        locationService = new LocationService(getApplicationContext());
+        konum=  String.valueOf(locationService.getLatitude()) + "," +
+                String.valueOf(locationService.getLongitude());
+
+        intentBunle = getIntent();
+        bundle = intentBunle.getExtras();
+        mimageView = (ImageView) this.findViewById(R.id.image_from_camera);
+        Button button = (Button) this.findViewById(R.id.take_image_from_camera);
+    }
+    <1>
+    public void takeImageFromCamera(View view) {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+    <2>
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bitmap mphoto = (Bitmap) data.getExtras().get("data");
+            encodedImageData =getEncoded64ImageStringFromBitmap(mphoto);
+            String brm = bundle.getString("birim");
+            String msj =bundle.getString("mesaj");
+            new WebService(getApplicationContext()).execute(brm,konum, msj, encodedImageData);
+            Intent i =new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(i);
+            mimageView.setImageBitmap(mphoto);
+        }
+    }
+
+    <3>
+    public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteFormat = stream.toByteArray();
+        // get the base 64 string
+        String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+
+        return imgString;
+    }
+}
+
+----
+<1> Kameradan görüntü almak için istek yapılır .
+<2> yapılan istek sonucu resim çekilir ve resim datası alınır .base64 formatına döndürmek için 3 numaralı metoda yollanır.
+<3> Bitmap formatında alınan resmi Base64 formatına dondürür.
+
+
+== 9) Web Service
+
+
+
+**
+Uygulamada Yaptığımız tüm acil birim çagrılarını burada tanımladığımız web service göndererek web tarafında weri tabanında kayıt altına alınır .
+hemen sonrasın da veriler  veritabanından çekilerek Web tarafında(http://www.yamankod.com/durumum_acil/ ) Birim ' e gösteriyor .
+**
+[source ,java]
+
+
+----
+
+public class WebService extends AsyncTask<String ,Void,String> {
+
+    Context ctx;
+    private  String TAG ="background";
+    private HttpClient httpClient;
+    private HttpPost httpPost;
+    private List<NameValuePair> nameValuePair;
+
+    JSONObject jsonObject;
+    private  ProgressDialog dialog ;
+
+   public WebService(Context ctx){
+       this.ctx=ctx;
+       dialog = new ProgressDialog(ctx);
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        String brm =params[0];
+        String knm=params[1];
+        String msj =params[2];
+        String rsm=params[3];
+
+        // replace with your url
+        String reg_url ="http://yamankod.com/durumum_acil/service.php";
+        //Date & Time
+        Calendar c = Calendar.getInstance();
+        jsonObject = new JSONObject();
+
+        try {
+             httpClient = new DefaultHttpClient();
+             httpPost = new HttpPost(reg_url);
+
+            jsonObject.put("birim", brm);
+            jsonObject.put("konum", knm);
+            jsonObject.put("mesaj", msj);
+            jsonObject.put("resim", rsm);
+            jsonObject.put("tarih", c.get(Calendar.YEAR)+"-"+(c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.DATE)+"-"+c.get((Calendar.HOUR_OF_DAY))+"-"+c.get(Calendar.MINUTE));
+
+            nameValuePair = new ArrayList<NameValuePair>(1);
+            nameValuePair.add(new BasicNameValuePair("parametre", jsonObject.toString()));
+
+        } catch (JSONException e) {e.printStackTrace();}
+        Log.d(TAG, "makePostRequest: Jsonn"+jsonObject.toString());
+        Log.d(TAG, "makePostRequest  Birim: "+brm+"--konum:"+knm+" -- Mesaj :" +msj+"--resim :"+reg_url+"--Tarih :");
+
+        //Encoding POST data
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+        } catch (UnsupportedEncodingException e) {e.printStackTrace();}
+        //making POST request.
+        try {
+            HttpResponse response = httpClient.execute(httpPost);
+            Log.d("Http Post Response:", response.toString());
+
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        String message ="gonderiliyor...";
+        this.dialog.setMessage(message);
+    }
+    @Override
+    protected void onPostExecute(String results) {
+        this.dialog.dismiss();
+    }
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
+    }
+}
+
+-----

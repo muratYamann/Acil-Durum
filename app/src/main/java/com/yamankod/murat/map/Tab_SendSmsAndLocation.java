@@ -1,21 +1,17 @@
 package com.yamankod.murat.map;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -40,7 +36,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
     android.telephony.SmsManager sms;
 
     private String numara="05452284808";
-    private BacgroundTask_V2 bacgroundTask_v2;
+    private WebService bacgroundTask_v2;
     private String konum;
     private String konumSms;
     private  String msj ;
@@ -60,24 +56,15 @@ public class Tab_SendSmsAndLocation extends Fragment {
     private Button btnItfaiye, btgaz, btnPolice, btnAmbulance, btnYolYardim, btElektrik;
     private Button btnjandarma ,btnOrmanYangini,btnBldye,btnTraficPolisi;
 
-
+    SharedPreferences sp;
+    SharedPreferences preferences_kisibilgi ;
     public  static  final String myidd ="Prefss";
-    public  static  final String Prefs ="Prefs";
-    public  static  final int actMode = Activity.MODE_PRIVATE;
-
 
     Bundle bundle;
-
-    SharedPreferences sp;
-    SharedPreferences.Editor editor;
     Vibrator vibrat;
 
     private String rsm ="murad";
     private String kisi_bilgileri;
-
-
-    SharedPreferences preferences_kisibilgi ;
-
 
 
     @Override
@@ -126,7 +113,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
         btnBldye = (Button)view. findViewById(R.id.belediye);
         btnTraficPolisi = (Button)view. findViewById(R.id.traffict);
 
-        bacgroundTask_v2=new BacgroundTask_V2(getActivity());
+        bacgroundTask_v2=new WebService(getActivity());
 
         bundle= new Bundle();
         //shared preferences
@@ -156,7 +143,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                             birim = pls;
                             Log.d(TAG, "makePostRequest  Birim: 2 " + "konum:" + konum + " -- Mesaj :" + msj + "--resim :" + "XYZWERSD" + "--Tarih :" + "21:21:21");
                             Toast.makeText(getActivity(), "Gonderildi", Toast.LENGTH_SHORT).show();
-                            new BacgroundTask_V2(getActivity()).execute(birim, konum, msj, rsm,kisi_bilgileri);
+                            new WebService(getActivity()).execute(birim, konum, msj, rsm,kisi_bilgileri);
                             break;
                         } catch (Exception e) {
                         }
@@ -170,7 +157,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                             bundle.putString("birim", birim);
                             bundle.putString("konum",konum);
                             bundle.putString("mesaj",msj);
-                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                            Intent i = new Intent(getActivity(), Camera.class);
                             i.putExtras(bundle);
                             startActivity(i);
                         } catch (Exception e) {
@@ -201,7 +188,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                         vibrat.vibrate(100);
                                         birim = amblns;
                                         Toast.makeText(getActivity(), "Gonderildi", Toast.LENGTH_SHORT).show();
-                                        new BacgroundTask_V2(getActivity()).execute(birim, konum, msj, rsm,kisi_bilgileri);
+                                        new WebService(getActivity()).execute(birim, konum, msj, rsm,kisi_bilgileri);
                                             Log.d(TAG, "kisi_bilgileri tamSendSMS EXECUTE : "+kisi_bilgileri);
                                     }catch (Exception e){}
                                         break;
@@ -212,7 +199,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
                                         } catch (Exception e) {}
@@ -239,7 +226,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             vibrat.vibrate(150);
                                             birim =yngn;
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -249,7 +236,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle); startActivity(i);
                                         } catch (Exception e) {}
                                         break;
@@ -279,7 +266,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             birim =gz;
                                             // sms.sendTextMessage(numara, null, msj + "\n" + "\n" + konumSms + "\n", null, null);
                                             Toast.makeText(getActivity(), " durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
 
                                         }catch (Exception e){}
                                         break;
@@ -291,7 +278,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);   startActivity(i);
                                         } catch (Exception e) {}
                                         break;
@@ -317,7 +304,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             vibrat.vibrate(100);
                                             birim = ylyrdm;
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -327,7 +314,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);startActivity(i);
                                         } catch (Exception e) {}
                                         break;
@@ -355,7 +342,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             vibrat.vibrate(100);
                                             birim = elktrk;
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -366,7 +353,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
 
@@ -398,7 +385,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             birim = jandarma;
                                             // sms.sendTextMessage(numara, null, msj + "\n" + "\n" + konumSms + "\n", null, null);
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -409,7 +396,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
 
@@ -439,7 +426,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             birim = ormanYng;
                                             // sms.sendTextMessage(numara, null, msj + "\n" + "\n" + konumSms + "\n", null, null);
                                             Toast.makeText(getActivity(), " durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim, konum, msj, rsm);
+                                            new WebService(getActivity()).execute(birim, konum, msj, rsm);
                                         } catch (Exception e) {
                                         }
                                         break;
@@ -451,7 +438,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim", birim);
                                             bundle.putString("konum", konum);
                                             bundle.putString("mesaj", msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
 
@@ -482,7 +469,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             birim = belediye;
                                             // sms.sendTextMessage(numara, null, msj + "\n" + "\n" + konumSms + "\n", null, null);
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -493,7 +480,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
 
@@ -523,7 +510,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             birim = trafikPolisi;
                                             // sms.sendTextMessage(numara, null, msj + "\n" + "\n" + konumSms + "\n", null, null);
                                             Toast.makeText(getActivity()," durum bilginiz iletildi", Toast.LENGTH_LONG).show();
-                                            new BacgroundTask_V2(getActivity()).execute(birim,konum,msj,rsm);
+                                            new WebService(getActivity()).execute(birim,konum,msj,rsm);
                                         }catch (Exception e){}
                                         break;
                                     case 1:
@@ -534,7 +521,7 @@ public class Tab_SendSmsAndLocation extends Fragment {
                                             bundle.putString("birim",birim);
                                             bundle.putString("konum",konum);
                                             bundle.putString("mesaj",msj);
-                                            Intent i = new Intent(getActivity(), CamereCaptureAndDisplayImage.class);
+                                            Intent i = new Intent(getActivity(), Camera.class);
                                             i.putExtras(bundle);
                                             startActivity(i);
 

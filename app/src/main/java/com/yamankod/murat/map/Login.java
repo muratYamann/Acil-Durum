@@ -188,21 +188,6 @@ public class Login extends AppCompatActivity {
 
     public String ControlUserID() {
 
-      /*
-        try {
-            String tc=userID.getText().toString().trim();
-            if (tc.length()<11) {
-                userID.setError("TC 11 haneden küçük olamaz");
-            }
-            String userage=userAge.getText().toString().trim();
-            if (userage.length()<4 && userage.length()>4 ) {
-                userAge.setError("Yaş 4  haneden küçük veya büyük olamaz olamaz");
-            }
-        }catch (Exception e){
-            Toast.makeText(Login.this, "giriş bilgilerinizi kontrol ediniz.", Toast.LENGTH_SHORT).show();
-        }
-        */
-
         Log.d(TAG, "ControlUserID: ");
         String responseValue = "";
         SoapObject request = new SoapObject(NAMESPACE_TC, METHODNAME_TC);

@@ -10,9 +10,6 @@
     <string name="tab_user">utilisateur</string>
 
 
-
-
-
     <!--Button Text  -->
     <string name="btnPolice">police</string>
     <string name="btnAmbulance">ambulance</string>
@@ -22,8 +19,6 @@
     <string name="btnElectrict">électrique</string>
     <string name="btnSoilder">gendarme</string>
     <string name="btnWhereIm">Où suis</string>
-
-
 
 
 

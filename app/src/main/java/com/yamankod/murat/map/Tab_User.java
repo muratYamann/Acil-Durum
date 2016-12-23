@@ -25,28 +25,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tab_User extends Fragment   {
-
     Context mContext;
 
     public static String TAG="_UserEmergency";
     SharedPreferences preferences ;
 
-
     String birimMesaj ;
     String birimAdi;
     String birimIslev;
-
-
-    String m1="";
-    String m2="";
-    String m3="";
-    String m4="";
-    String m5="";
-    String m6="";
-    String m7="";
-    String m8="";
-    String m9="";
-    String m10="";
 
     String birimAdi1;
     String birimAdi2;
@@ -54,8 +40,6 @@ public class Tab_User extends Fragment   {
     String birimAdi4;
     String birimAdi5;
     String birimAdi6;
-    String birimAdi7;
-    String birimAdi8;
 
     String br1;
     String br2;
@@ -63,24 +47,17 @@ public class Tab_User extends Fragment   {
     String br4;
     String br5;
     String br6;
-    String br7;
-    String br8;
-
-
-
 
 
     private String gonderilecekNumara;
     private String konum;
-    private  String Sendmsj ;
     Bundle bundleBirimAdi;
 
     android.telephony.SmsManager sms;
     LocationService locationService ;
 
-    String msj="";
     View view;
-    Button birim1,birim2,birim3,birim4,birim5,birim6,birim7,birim8,birim9,birim10;
+    Button birim1,birim2,birim3,birim4,birim5,birim6;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,12 +68,11 @@ public class Tab_User extends Fragment   {
                 String.valueOf(locationService.getLongitude());
 
         butonName();
-
         onClick();
-
-
         return view;
     }
+
+
     public  void setupVariable(){
 
         birim1 =(Button)view.findViewById(R.id.brm1);
@@ -105,8 +81,6 @@ public class Tab_User extends Fragment   {
         birim4 =(Button)view.findViewById(R.id.brm4);
         birim5 =(Button)view.findViewById(R.id.brm5);
         birim6 =(Button)view.findViewById(R.id.brm6);
-      //  birim7 =(Button)view.findViewById(R.id.brm7);
-      //  birim8 =(Button)view.findViewById(R.id.brm8);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         locationService = new LocationService(getActivity());
@@ -149,16 +123,7 @@ public class Tab_User extends Fragment   {
         String[]data6 =br6.split(";");
         birimAdi6= data6[0].toString();
         birim6.setText(birimAdi6.toString());
-/*
-        br7 = preferences.getString("birim7", "Boş");
-        String[]data7 =br7.split(";");
-        birimAdi7= data7[0].toString();
-        birim7.setText(birimAdi7.toString());
 
-        br8 = preferences.getString("birim8", "Boş");
-        String[]data8 =br8.split(";");
-        birimAdi8= data8[0].toString();
-        birim8.setText(birimAdi8.toString());*/
     }
 
 
@@ -236,57 +201,57 @@ public class Tab_User extends Fragment   {
             final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi, R.drawable.add_oi};
             ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
 
-            new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                    .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int item) {
-                           switch (item) {
-                                case 0:
+new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
+    .setAdapter(adapter, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+           switch (item) {
+                case 0:
 
-                                    if (!br2.equals("Boş")) {
+                    if (!br2.equals("Boş")) {
 
-                                        String myStr = preferences.getString("birim2", "a");
-                                        String[] data = myStr.split(";");
-                                        birimAdi = data[0].toString();
-                                        birimIslev = data[1].toString();
-                                        birimMesaj = data[2].toString();
-                                        gonderilecekNumara = data[3].toString();
+                        String myStr = preferences.getString("birim2", "a");
+                        String[] data = myStr.split(";");
+                        birimAdi = data[0].toString();
+                        birimIslev = data[1].toString();
+                        birimMesaj = data[2].toString();
+                        gonderilecekNumara = data[3].toString();
 
-                                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                        startActivity(i);
-                                     } else {
-                                        Toast.makeText(getActivity(), "Birim girilmedi  Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                    break;
-                                case 1:
+                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
+                        startActivity(i);
+                     } else {
+                        Toast.makeText(getActivity(), "Birim girilmedi  Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case 1:
 
-                                    if (!br2.equals("Boş")) {
+                    if (!br2.equals("Boş")) {
 
-                                        String myStr = preferences.getString("birim2", "a");
+                        String myStr = preferences.getString("birim2", "a");
 
-                                        String[] data = myStr.split(";");
-                                        birimAdi = data[0].toString();
-                                        birimIslev = data[1].toString();
-                                        birimMesaj = data[2].toString();
-                                        gonderilecekNumara = data[3].toString();
+                        String[] data = myStr.split(";");
+                        birimAdi = data[0].toString();
+                        birimIslev = data[1].toString();
+                        birimMesaj = data[2].toString();
+                        gonderilecekNumara = data[3].toString();
 
-                                        sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                     } else {
-                                        Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                    }
-                                    break;
+                        sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
+                     } else {
+                        Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
 
-                                case 2:
-                                    try {
-                                        bundleBirimAdi.putString("fullname", "birim2");
-                                        Intent is = new Intent(getActivity(), DepartmanAdd.class);
-                                        is.putExtras(bundleBirimAdi);
-                                        startActivity(is);
-                                    } catch (Exception e) {
-                                    }
-                                    break;
-                            }
-                        }
-                    }).show();}});
+                case 2:
+                    try {
+                        bundleBirimAdi.putString("fullname", "birim2");
+                        Intent is = new Intent(getActivity(), DepartmanAdd.class);
+                        is.putExtras(bundleBirimAdi);
+                        startActivity(is);
+                    } catch (Exception e) {
+                    }
+                    break;
+            }
+        }
+    }).show();}});
 
 
 
@@ -354,51 +319,51 @@ public class Tab_User extends Fragment   {
                 final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi, R.drawable.add_oi};
                 ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
 
-                new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                 switch (item) {
-                                    case 0:
+    new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
+            .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                     switch (item) {
+                        case 0:
 
-                                        if (!br4.equals("Boş")) {
+                            if (!br4.equals("Boş")) {
 
-                                            String myStr = preferences.getString("birim4", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
+                                String myStr = preferences.getString("birim4", "a");
+                                String[] data = myStr.split(";");
+                                birimAdi = data[0].toString();
+                                birimIslev = data[1].toString();
+                                birimMesaj = data[2].toString();
+                                gonderilecekNumara = data[3].toString();
 
-                                            Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                            startActivity(i);
-                                          } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 1:
+                                Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
+                                startActivity(i);
+                              } else {
+                                Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case 1:
 
-                                        if (!br4.equals("Boş")) {
+                            if (!br4.equals("Boş")) {
 
-                                            String myStr = preferences.getString("birim4", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
-                                            sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                        } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 2:
-                                        try {
-                                            bundleBirimAdi.putString("fullname", "birim4");
-                                            Intent is = new Intent(getActivity(), DepartmanAdd.class);
-                                            is.putExtras(bundleBirimAdi);
-                                            startActivity(is);
-                                        } catch (Exception e) {
-                                        }break;
-                                }}}).show();}});
+                                String myStr = preferences.getString("birim4", "a");
+                                String[] data = myStr.split(";");
+                                birimAdi = data[0].toString();
+                                birimIslev = data[1].toString();
+                                birimMesaj = data[2].toString();
+                                gonderilecekNumara = data[3].toString();
+                                sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
+                            } else {
+                                Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case 2:
+                            try {
+                                bundleBirimAdi.putString("fullname", "birim4");
+                                Intent is = new Intent(getActivity(), DepartmanAdd.class);
+                                is.putExtras(bundleBirimAdi);
+                                startActivity(is);
+                            } catch (Exception e) {
+                            }break;
+                    }}}).show();}});
 
         birim5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -410,52 +375,52 @@ public class Tab_User extends Fragment   {
                 final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi, R.drawable.add_oi};
                 ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
 
-                new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                switch (item) {
-                                    case 0:
+new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
+.setAdapter(adapter, new DialogInterface.OnClickListener() {
+    public void onClick(DialogInterface dialog, int item) {
+        switch (item) {
+            case 0:
 
-                                        if (!br5.equals("Boş")) {
+                if (!br5.equals("Boş")) {
 
-                                            String myStr = preferences.getString("birim5", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
+                    String myStr = preferences.getString("birim5", "a");
+                    String[] data = myStr.split(";");
+                    birimAdi = data[0].toString();
+                    birimIslev = data[1].toString();
+                    birimMesaj = data[2].toString();
+                    gonderilecekNumara = data[3].toString();
 
-                                            Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                            startActivity(i);
-                                           } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 1:
+                    Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
+                    startActivity(i);
+                   } else {
+                    Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case 1:
 
-                                        if (!br5.equals("Boş")) {
+                if (!br5.equals("Boş")) {
 
-                                            String myStr = preferences.getString("birim5", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
-                                            sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                            Toast.makeText(getActivity(), birimMesaj, Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 2:
-                                        try {
-                                            bundleBirimAdi.putString("fullname", "birim5");
-                                            Intent is = new Intent(getActivity(), DepartmanAdd.class);
-                                            is.putExtras(bundleBirimAdi);
-                                            startActivity(is);
-                                        } catch (Exception e) {
-                                        }break;
-                                }}}).show();}});
+                    String myStr = preferences.getString("birim5", "a");
+                    String[] data = myStr.split(";");
+                    birimAdi = data[0].toString();
+                    birimIslev = data[1].toString();
+                    birimMesaj = data[2].toString();
+                    gonderilecekNumara = data[3].toString();
+                    sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
+                    Toast.makeText(getActivity(), birimMesaj, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case 2:
+                try {
+                    bundleBirimAdi.putString("fullname", "birim5");
+                    Intent is = new Intent(getActivity(), DepartmanAdd.class);
+                    is.putExtras(bundleBirimAdi);
+                    startActivity(is);
+                } catch (Exception e) {
+                }break;
+        }}}).show();}});
 
 
 
@@ -464,183 +429,55 @@ public class Tab_User extends Fragment   {
             public void onClick(View v) {
 
 
-                final String[] items = new String[]{"Ara", "SMS", "Acil birimini Ekle"};
-                final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi, R.drawable.add_oi};
-                ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
+final String[] items = new String[]{"Ara", "SMS", "Acil birimini Ekle"};
+final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi, R.drawable.add_oi};
+ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
 
-                new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                 switch (item) {
-                                    case 0:
+new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
+.setAdapter(adapter, new DialogInterface.OnClickListener() {
+    public void onClick(DialogInterface dialog, int item) {
+         switch (item) {
+            case 0:
 
-                                        if (!br6.equals("Boş")) {
+                if (!br6.equals("Boş")) {
 
-                                            String myStr = preferences.getString("birim6", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
+                    String myStr = preferences.getString("birim6", "a");
+                    String[] data = myStr.split(";");
+                    birimAdi = data[0].toString();
+                    birimIslev = data[1].toString();
+                    birimMesaj = data[2].toString();
+                    gonderilecekNumara = data[3].toString();
 
-                                            Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                            startActivity(i);
-                                         } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 1:
-
-                                        if (!br6.equals("Boş")) {
-
-                                            String myStr = preferences.getString("birim6", "a");
-                                            String[] data = myStr.split(";");
-                                            birimAdi = data[0].toString();
-                                            birimIslev = data[1].toString();
-                                            birimMesaj = data[2].toString();
-                                            gonderilecekNumara = data[3].toString();
-                                            sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                        } else {
-                                            Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        break;
-                                    case 2:
-                                        try {
-                                            bundleBirimAdi.putString("fullname", "birim6");
-                                            Intent is = new Intent(getActivity(), DepartmanAdd.class);
-                                            is.putExtras(bundleBirimAdi);
-                                            startActivity(is);
-                                        } catch (Exception e) {
-                                        }break;
-                                }}}).show();}});
-
-
-
-        /*
-        birim7.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View v) {
-
-                try {
-
-                    bundleBirimAdi.putString("fullname", "birim7");
-
-                    Intent i = new Intent(getActivity(), DepartmanAdd.class);
-                    i.putExtras(bundleBirimAdi);
+                    Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
                     startActivity(i);
-
-                } catch (Exception e) {
-
+                 } else {
+                    Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
                 }
-                return true;
-            }
-        });
+                break;
+            case 1:
 
+                if (!br6.equals("Boş")) {
 
-        birim7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                String myStr = preferences.getString("birim7", "a");
-
-                String[] data = myStr.split(";");
-                String birimAdi = data[0].toString();
-                String birimIslev = data[1].toString();
-                final String birimMesaj = data[2].toString();
-                gonderilecekNumara = data[3].toString();
-
-                Toast.makeText(getActivity(), birimAdi + birimIslev + birimMesaj + gonderilecekNumara, Toast.LENGTH_SHORT).show();
-
-
-                final String[] items = new String[]{"Ara", "SMS"};
-                final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi};
-                ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
-
-                new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                Toast.makeText(getActivity(), "call Selected: " + item, Toast.LENGTH_SHORT).show();
-                                switch (item) {
-                                    case 0:
-                                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                        startActivity(i);
-                                        Toast.makeText(getActivity(), "sms Selected: " + item, Toast.LENGTH_SHORT).show();
-                                        break;
-
-                                    case 1:
-                                        sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                        Toast.makeText(getActivity(), birimMesaj, Toast.LENGTH_SHORT).show();
-                                        break;
-                                }
-                            }
-                        }).show();
-
-            }
-
-        });
-
-
-        birim8.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View v) {
-
+                    String myStr = preferences.getString("birim6", "a");
+                    String[] data = myStr.split(";");
+                    birimAdi = data[0].toString();
+                    birimIslev = data[1].toString();
+                    birimMesaj = data[2].toString();
+                    gonderilecekNumara = data[3].toString();
+                    sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
+                } else {
+                    Toast.makeText(getActivity(), "Birim girilmedi Lütfen Birim Giriniz.!!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case 2:
                 try {
-
-                    bundleBirimAdi.putString("fullname", "birim8");
-
-                    Intent i = new Intent(getActivity(), DepartmanAdd.class);
-                    i.putExtras(bundleBirimAdi);
-                    startActivity(i);
-
+                    bundleBirimAdi.putString("fullname", "birim6");
+                    Intent is = new Intent(getActivity(), DepartmanAdd.class);
+                    is.putExtras(bundleBirimAdi);
+                    startActivity(is);
                 } catch (Exception e) {
-
-                }
-                return true;
-            }
-        });
-        birim8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                String myStr = preferences.getString("birim8", "a");
-
-                String[] data = myStr.split(";");
-                String birimAdi = data[0].toString();
-                String birimIslev = data[1].toString();
-                final String birimMesaj = data[2].toString();
-                gonderilecekNumara = data[3].toString();
-
-                Toast.makeText(getActivity(), birimAdi + birimIslev + birimMesaj + gonderilecekNumara, Toast.LENGTH_SHORT).show();
-
-
-                final String[] items = new String[]{"Ara", "SMS"};
-                final Integer[] icons = new Integer[]{R.drawable.call_oi, R.drawable.sms_oi};
-                ListAdapter adapter = new ArrayAdapterWithIcon(getActivity(), items, icons);
-
-                new AlertDialog.Builder(getActivity()).setTitle("işlem Seçin")
-                        .setAdapter(adapter, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                Toast.makeText(getActivity(), "call Selected: " + item, Toast.LENGTH_SHORT).show();
-                                switch (item) {
-                                    case 0:
-                                        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + gonderilecekNumara));
-                                        startActivity(i);
-                                        Toast.makeText(getActivity(), "sms Selected: " + item, Toast.LENGTH_SHORT).show();
-                                        break;
-
-                                    case 1:
-                                        sms.sendTextMessage(gonderilecekNumara, null, birimMesaj + "\n" + "\n" + konum + "\n", null, null);
-                                        Toast.makeText(getActivity(), birimMesaj, Toast.LENGTH_SHORT).show();
-                                        break;
-                                }
-                            }
-                        }).show();
-
-            }
-
-        });
-*/
-
+                }break;
+        }}}).show();}});
 
     }
 

@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by murat on 19.04.2016.
  */
-public class BacgroundTask_V2 extends AsyncTask<String ,Void,String> {
+public class WebService extends AsyncTask<String ,Void,String> {
 
     Context ctx;
     private  String TAG ="background";
@@ -42,33 +42,25 @@ public class BacgroundTask_V2 extends AsyncTask<String ,Void,String> {
     JSONObject jsonObject;
     private  ProgressDialog dialog ;
 
-   public BacgroundTask_V2(Context ctx){
+   public WebService(Context ctx){
        this.ctx=ctx;
        dialog = new ProgressDialog(ctx);
     }
 
-
     @Override
     protected String doInBackground(String... params) {
-
         String brm =params[0];
         String knm=params[1];
         String msj =params[2];
         String rsm=params[3];
 
-        //("2",konum,msj,rsm)
-
         // replace with your url
         String reg_url ="http://yamankod.com/durumum_acil/service.php";
-
         //Date & Time
         Calendar c = Calendar.getInstance();
         jsonObject = new JSONObject();
 
-
         try {
-
-
              httpClient = new DefaultHttpClient();
              httpPost = new HttpPost(reg_url);
 
@@ -81,27 +73,18 @@ public class BacgroundTask_V2 extends AsyncTask<String ,Void,String> {
             nameValuePair = new ArrayList<NameValuePair>(1);
             nameValuePair.add(new BasicNameValuePair("parametre", jsonObject.toString()));
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        } catch (JSONException e) {e.printStackTrace();}
         Log.d(TAG, "makePostRequest: Jsonn"+jsonObject.toString());
         Log.d(TAG, "makePostRequest  Birim: "+brm+"--konum:"+knm+" -- Mesaj :" +msj+"--resim :"+reg_url+"--Tarih :");
 
         //Encoding POST data
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-
-        } catch (UnsupportedEncodingException e) {
-            // log exception
-            e.printStackTrace();
-        }
+        } catch (UnsupportedEncodingException e) {e.printStackTrace();}
         //making POST request.
         try {
-
             HttpResponse response = httpClient.execute(httpPost);
             Log.d("Http Post Response:", response.toString());
-
 
         } catch (ClientProtocolException e) {
             e.printStackTrace();
@@ -109,28 +92,20 @@ public class BacgroundTask_V2 extends AsyncTask<String ,Void,String> {
             e.printStackTrace();
         }
         return null;
-
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        String message ="gonderiliyor";
+        String message ="gonderiliyor...";
         this.dialog.setMessage(message);
-
     }
-
     @Override
     protected void onPostExecute(String results) {
         this.dialog.dismiss();
     }
-
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
-
-
-
-
 }

@@ -42,22 +42,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
         mContext =getApplicationContext();
         locationService = new LocationService(getApplicationContext());
-
-
          c = (CoordinatorLayout)findViewById(R.id.main_content);
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
-
-
+    //Location Serviceden Aldığı Degerler sayesinde Konumu haritaya basar.
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -65,7 +57,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng location = new LatLng(locationService.getLatitude(), locationService.getLongitude());
         mMap.addMarker(new MarkerOptions().position(location).title("Konumunuz"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-
 
 
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
@@ -78,32 +69,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Snackbar snackbar = Snackbar.make(c, adress.toString(), Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
-
-
-        /*
-        tv  = new TextView(this);
-        tv.setWidth(10);
-        tv.setHeight(5);
-        tv.setText(adress);
-        setContentView(tv);
-         */
-               /*
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-        addresses = geocoder.getFromLocation(40821708, 29923384, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-
-        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-
-            */
     }
 
+    //Aldıgı enlem boylam degerleri sayesinde adress bilgisini dondorür
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -125,7 +93,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         return strAdd;
     }
-
-
-
 }
